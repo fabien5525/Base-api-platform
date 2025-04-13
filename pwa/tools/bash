@@ -1,0 +1,7 @@
+#!/usr/bin/bash
+
+if [ $# -gt 0 ]; then
+    docker compose exec --user=node pwa zsh -c "$*"
+else
+    docker compose exec --user=node pwa zsh
+fi

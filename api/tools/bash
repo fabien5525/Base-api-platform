@@ -1,0 +1,7 @@
+#!/usr/bin/bash
+
+if [ $# -gt 0 ]; then
+    docker compose exec --user=www-data php zsh -c "$*"
+else
+    docker compose exec --user=www-data php zsh
+fi
