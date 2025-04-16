@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "npm run generate:types && next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "generate:types": "dotenv -e .env.local -e .env -- sh -c 'openapi-typescript $NEXT_PUBLIC_API_URL/docs.jsonopenapi -o types/openapi.ts'"
   },
   "dependencies": {
     "@api-platform/admin": "^4.0.6",
@@ -29,8 +30,10 @@
     "@types/node": "^22.13.10",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
+    "dotenv-cli": "^8.0.0",
     "eslint": "^9.22.0",
     "eslint-config-next": "^15.2.1",
+    "openapi-typescript": "^7.6.1",
     "typescript": "^5.8.2"
   },
   "peerDependencies": {

@@ -2,18 +2,18 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import adminPicture from "../public/api-platform/admin.svg";
 import rocketPicture from "../public/api-platform/rocket.svg";
 import logo from "../public/api-platform/logo_api-platform.svg";
 import logoTilleuls from "../public/api-platform/logo_tilleuls.svg";
 import apiPicture from "../public/api-platform/api.svg";
+import adminPicture from "../public/api-platform/admin.svg";
 import "@fontsource/poppins";
 import "@fontsource/poppins/600.css";
 import "@fontsource/poppins/700.css";
 
 const Welcome = () => {
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-  if (undefined === apiUrl) throw new Error("NEXT_PUBLIC_API_URL is not defined");
+  const publicApiUrl = process.env.NEXT_PUBLIC_API_URL;
+  if (undefined === publicApiUrl) throw new Error("NEXT_PUBLIC_API_URL is not defined");
 
   return(
     <div className="w-full overflow-x-hidden">
@@ -102,7 +102,8 @@ const Welcome = () => {
               Available services:
             </h2>
             <div className="flex justify-center flex-wrap | lg:justify-start lg:grid lg:gap-5 lg:grid-cols-2">
-              <Card image={apiPicture} title="API" url={apiUrl} />
+              <Card image={apiPicture} title="API" url={publicApiUrl} />
+              <Card image={adminPicture} title="Greeting" url="/greeting" />
             </div>
           </div>
         </div>

@@ -2,7 +2,7 @@ services:
   php:
     image: php:8.3-fpm
     build: ./docker/d-php-fpm
-    user: "${UID:-1000}:1000"  # Ton UID pour éviter les problèmes de droits
+    user: "${UID:-1000}:1000"
     volumes:
       - ./api:/var/www/html
     environment:

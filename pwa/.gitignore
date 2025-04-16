@@ -12,6 +12,9 @@
 /.next/
 /out/
 
+# openapi-ts
+types/openapi.ts
+
 # production
 /build
 
