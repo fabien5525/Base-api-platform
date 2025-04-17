@@ -10,10 +10,12 @@ import adminPicture from "../public/api-platform/admin.svg";
 import "@fontsource/poppins";
 import "@fontsource/poppins/600.css";
 import "@fontsource/poppins/700.css";
+import {useIntl} from "react-intl";
 
 const Welcome = () => {
   const publicApiUrl = process.env.NEXT_PUBLIC_API_URL;
   if (undefined === publicApiUrl) throw new Error("NEXT_PUBLIC_API_URL is not defined");
+  const intl = useIntl();
 
   return(
     <div className="w-full overflow-x-hidden">
@@ -103,7 +105,10 @@ const Welcome = () => {
             </h2>
             <div className="flex justify-center flex-wrap | lg:justify-start lg:grid lg:gap-5 lg:grid-cols-2">
               <Card image={apiPicture} title="API" url={publicApiUrl} />
-              <Card image={adminPicture} title="Greeting" url="/greeting" />
+              <Card image={adminPicture}
+                    title={intl.formatMessage({id: "greeting"})}
+                    url="/greeting"
+              />
             </div>
           </div>
         </div>
