@@ -6,18 +6,18 @@ import { IntlProvider } from 'react-intl'
 import translations from "../translations/translations"
 
 function MyApp({ Component, pageProps, router }: AppProps<{dehydratedState: DehydratedState}>) {
-  const locale = router.locale ?? 'fr';
-  return (
-    <IntlProvider
-      locale={locale}
-      defaultLocale="fr"
-      messages={translations[locale as keyof typeof translations]}
-    >
-      <Layout dehydratedState={pageProps.dehydratedState}>
-        <Component {...pageProps} />
-      </Layout>
-    </IntlProvider>
-  );
+    const locale = router.locale ?? 'fr';
+    return (
+        <IntlProvider
+            locale={locale}
+            defaultLocale="fr"
+            messages={translations[locale as keyof typeof translations]}
+        >
+            <Layout dehydratedState={pageProps.dehydratedState}>
+                <Component {...pageProps} />
+            </Layout>
+        </IntlProvider>
+    );
 }
 
 export default MyApp
