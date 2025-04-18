@@ -22,11 +22,11 @@ export default function Greeting() {
         fetchGreetings().catch(console.error);
     }, []);
 
-    return <div className="min-w-100 min-h-dvh bg-gray-400">
+    return <div className="">
         {greetings.map((greeting) => (
-            <div key={greeting.id} className="bg-white p-4 m-4 rounded shadow">
-                <h2 className="text-xl font-bold">{greeting.id}</h2>
-                <p className="text-gray-700">{greeting.name}</p>
+            <div key={greeting.id} className="">
+                <h2 className="">{greeting.id}</h2>
+                <p className="">{greeting.name}</p>
             </div>
         ))}
     </div>;

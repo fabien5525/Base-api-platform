@@ -11,7 +11,7 @@ const Welcome = () => {
     return(
         <div>
             <Head>
-                <Link href="/greeting">{intl.formatMessage({id: "greeting"})}</Link>
+                <Link href="/greeting" className="btn btn-outline-primary">{intl.formatMessage({id: "greeting"})}</Link>
             </Head>
         </div>
     );
