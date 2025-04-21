@@ -1,7 +1,7 @@
 services:
     php:
         image: php:8.3-fpm
-        build: ./docker/d-php-fpm
+        build: ./docker/php
         user: "${UID:-1000}:1000"
         volumes:
             - ./api:/var/www/html
@@ -9,7 +9,7 @@ services:
             - UID=${UID:-1000}
 
     httpd:
-        build: ./docker/d-httpd
+        build: ./docker/httpd
         volumes:
             - ./api:/var/www/html:rw,cached
             - ./pwa:/var/www/pwa:rw,cached
@@ -35,16 +35,24 @@ services:
     adminer:
         image: adminer
         ports:
-            - "8080:8080"
+            - "8082:8080"
         depends_on:
             - db
 
     pwa:
-        build: ./docker/d-node
+        build: ./docker/pwa
         volumes:
             - ./pwa:/var/www/pwa
         depends_on:
             - php
 
+    playwright:
+        build: ./docker/playwright
+        volumes:
+            - ./e2e:/var/www/e2e
+            - playwright_cache:/home/node/.cache/ms-playwright
+
 volumes:
     database_data:
+    playwright_cache:
+

@@ -6,13 +6,12 @@ module.exports = defineConfig({
     fullyParallel: true,
     forbidOnly: !!process.env.CI,
     retries: 0,
-    workers: 1,
-    reporter: 'html',
+    workers: 3,
+    reporter: [['html', {open: 'never'}]],
     use: {
         ignoreHTTPSErrors: true,
-        trace: 'on-first-retry',
+        trace: 'on',
     },
-
     projects: [
         {
             name: 'chromium',

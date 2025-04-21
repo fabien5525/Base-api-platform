@@ -1,0 +1,7 @@
+#!/usr/bin/bash
+
+if [ $# -gt 0 ]; then
+    docker compose run --rm --user=node playwright zsh -ic "$*"
+else
+    docker compose run --rm --user=node playwright zsh
+fi

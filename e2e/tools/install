@@ -1,0 +1,5 @@
+#!/usr/bin/bash
+
+# Install dependencies, just need to do it one time, then cached in docker volume
+docker compose run --rm --user=root playwright bash -ic "chown -R node:node /home/node && rm -Rf /home/node/.cache/ms-playwright/*"
+docker compose run --rm --user=node playwright zsh -ic "npx playwright install"
