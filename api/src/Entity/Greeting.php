@@ -14,19 +14,18 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Greeting
 {
     /**
-     * The entity ID
+     * A nice person.
      */
-    #[ORM\Id]
+    #[Assert\NotBlank]
+    #[ORM\Column]
+    public string $name = '';
+    /**
+     * The entity ID.
+     */
     #[ORM\Column(type: 'integer')]
     #[ORM\GeneratedValue(strategy: 'SEQUENCE')]
+    #[ORM\Id]
     private ?int $id = null;
-
-    /**
-     * A nice person
-     */
-    #[ORM\Column]
-    #[Assert\NotBlank]
-    public string $name = '';
 
     public function getId(): ?int
     {

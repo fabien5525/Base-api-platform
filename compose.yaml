@@ -1,50 +1,50 @@
 services:
-  php:
-    image: php:8.3-fpm
-    build: ./docker/d-php-fpm
-    user: "${UID:-1000}:1000"
-    volumes:
-      - ./api:/var/www/html
-    environment:
-      - UID=${UID:-1000}
+    php:
+        image: php:8.3-fpm
+        build: ./docker/d-php-fpm
+        user: "${UID:-1000}:1000"
+        volumes:
+            - ./api:/var/www/html
+        environment:
+            - UID=${UID:-1000}
 
-  httpd:
-    build: ./docker/d-httpd
-    volumes:
-      - ./api:/var/www/html:rw,cached
-      - ./pwa:/var/www/pwa:rw,cached
-    ports:
-      - "80:80"
+    httpd:
+        build: ./docker/d-httpd
+        volumes:
+            - ./api:/var/www/html:rw,cached
+            - ./pwa:/var/www/pwa:rw,cached
+        ports:
+            - "80:80"
 
-  db:
-    image: postgres:16-alpine
-    environment:
-      - POSTGRES_DB=app
-      - POSTGRES_USER=root
-      - POSTGRES_PASSWORD=toor
-    healthcheck:
-      test: ["CMD", "pg_isready", "-d", "app", "-U", "root"]
-      timeout: 5s
-      retries: 5
-      start_period: 60s
-    volumes:
-      - database_data:/var/lib/postgresql/data:rw
-    ports:
-      - "5432:5432"
+    db:
+        image: postgres:16-alpine
+        environment:
+            - POSTGRES_DB=app
+            - POSTGRES_USER=root
+            - POSTGRES_PASSWORD=toor
+        healthcheck:
+            test: [ "CMD", "pg_isready", "-d", "app", "-U", "root" ]
+            timeout: 5s
+            retries: 5
+            start_period: 60s
+        volumes:
+            - database_data:/var/lib/postgresql/data:rw
+        ports:
+            - "5432:5432"
 
-  adminer:
-    image: adminer
-    ports:
-      - "8080:8080"
-    depends_on:
-      - db
+    adminer:
+        image: adminer
+        ports:
+            - "8080:8080"
+        depends_on:
+            - db
 
-  pwa:
-    build: ./docker/d-node
-    volumes:
-      - ./pwa:/var/www/pwa
-    depends_on:
-      - php
+    pwa:
+        build: ./docker/d-node
+        volumes:
+            - ./pwa:/var/www/pwa
+        depends_on:
+            - php
 
 volumes:
-  database_data:
+    database_data:

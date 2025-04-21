@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 export type ClientSession = {
-    roles: string[]
-}
+    roles: string[];
+};
 
 export function useSession(): [ClientSession | null, boolean] {
     const [session, setSession] = useState<ClientSession | null>(null);
@@ -13,7 +13,7 @@ export function useSession(): [ClientSession | null, boolean] {
     useEffect(() => {
         let isMounted = true;
 
-        fetch('/api/session')
+        fetch("/api/session")
             .then((res) => res.json())
             .then((data) => {
                 console.log(data);

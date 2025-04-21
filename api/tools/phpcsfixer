@@ -1,0 +1,3 @@
+#!/usr/bin/bash
+
+docker compose exec --user=www-data php zsh -c "export PHP_CS_FIXER_IGNORE_ENV=1; vendor/bin/php-cs-fixer fix"

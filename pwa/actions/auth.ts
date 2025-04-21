@@ -1,10 +1,11 @@
-'use server';
+"use server";
 
-import {paths} from "@openapi";
-import {createSession} from "lib/session";
-import {redirect} from "next/navigation";
+import { paths } from "@openapi";
+import { createSession } from "lib/session";
+import { redirect } from "next/navigation";
 
-type AuthResponse200 = paths["/auth"]["post"]["responses"]["200"]['content']["application/json"];
+type AuthResponse200 =
+    paths["/auth"]["post"]["responses"]["200"]["content"]["application/json"];
 
 export type SignupActionState = {
     email: string;
@@ -14,51 +15,51 @@ export type SignupActionState = {
         email?: string[];
         password?: string[];
     };
-}
+};
 
 export async function signup(
-    previousState: SignupActionState|undefined,
-    formData: FormData
+    previousState: SignupActionState | undefined,
+    formData: FormData,
 ): Promise<SignupActionState> {
-    const email = formData.get('email') as string;
-    const password = formData.get('password') as string;
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
 
     if (!email || !password) {
         return {
             email,
             password,
             errors: {
-                form: ['Email and password are required']
-            }
-        }
+                form: ["Email and password are required"],
+            },
+        };
     }
 
     const res = await fetch(`${process.env.INTERNAL_API_URL}/auth`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
+            "Content-Type": "application/json",
+            Accept: "application/json",
         },
         body: JSON.stringify({
             email: email,
-            password: password
-        })
+            password: password,
+        }),
     });
 
     if (!res.ok) {
         const response = res.json();
-        console.error(JSON.stringify(response))
+        console.error(JSON.stringify(response));
         return {
             email,
             password,
             errors: {
-                form: ['Invalid email or password']
-            }
-        }
+                form: ["Invalid email or password"],
+            },
+        };
     }
 
-    const data = await res.json() as AuthResponse200;
+    const data = (await res.json()) as AuthResponse200;
     await createSession(data.token);
 
-    redirect('/');
+    redirect("/");
 }

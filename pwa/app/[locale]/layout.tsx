@@ -1,17 +1,20 @@
-import { ReactNode } from 'react';
+import { ReactNode } from "react";
 import ClientIntlProvider from "../../components/ClientIntlProvider";
 
 // CSS
-import '../../styles/globals.css';
+import "../../styles/globals.css";
 
 type RootLayoutProps = {
     children: ReactNode;
     params: Promise<{
-        locale: string
-    }>
-}
+        locale: string;
+    }>;
+};
 
-export default async function RootLayout({ children, params }: RootLayoutProps) {
+export default async function RootLayout({
+    children,
+    params,
+}: RootLayoutProps) {
     const { locale } = await params;
     return (
         <html lang={locale}>

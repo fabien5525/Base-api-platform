@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { ReactNode } from 'react';
-import { IntlProvider } from 'react-intl';
-import translations from '../translations/translations';
+import { ReactNode } from "react";
+import { IntlProvider } from "react-intl";
+import translations from "../translations/translations";
 
 type Props = {
     children: ReactNode;

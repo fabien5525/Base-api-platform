@@ -8,36 +8,37 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Attribute\Groups;
+use Webmozart\Assert\Assert as WebmozartAssert;
 
 #[ApiResource(
     normalizationContext: ['groups' => ['user:read']],
     denormalizationContext: ['groups' => ['user:write']]
 )]
-#[ORM\Table(name: '`user`')] // Avoid conflict with the postgresql reserved word "user"
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-class User implements UserInterface, PasswordAuthenticatedUserInterface
+// Avoid conflict with the postgresql reserved word "user"
+#[ORM\Table(name: '`user`')] class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[Groups(['user:read'])]
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    #[ORM\GeneratedValue]
+    #[ORM\Id]
+    private ?int $id = null {
+        get {
+            return $this->id;
+        }
+    }
 
     #[Groups(['user:read', 'user:write'])]
     #[ORM\Column(length: 180, unique: true)]
     private ?string $email = null;
 
+    /** @var list<string> */
     #[ORM\Column]
     private array $roles = [];
 
     #[Groups(['user:write'])]
     #[ORM\Column]
     private ?string $password = null;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
 
     public function getEmail(): ?string
     {
@@ -58,13 +59,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUserIdentifier(): string
     {
-        return (string) $this->email;
+        WebmozartAssert::string($this->email);
+        WebmozartAssert::notEmpty($this->email);
+
+        return $this->email;
     }
 
     /**
-     * @see UserInterface
+     * @return non-empty-array<string>
      *
-     * @return list<string>
+     * @see UserInterface
      */
     public function getRoles(): array
     {
