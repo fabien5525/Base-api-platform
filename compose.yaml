@@ -29,6 +29,8 @@ services:
       start_period: 60s
     volumes:
       - database_data:/var/lib/postgresql/data:rw
+    ports:
+      - "5432:5432"
 
   adminer:
     image: adminer
@@ -36,7 +38,6 @@ services:
       - "8080:8080"
     depends_on:
       - db
-
 
   pwa:
     build: ./docker/d-node

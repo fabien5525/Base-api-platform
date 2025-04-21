@@ -4,3 +4,7 @@ controllers:
         namespace: App\Controller
     type: attribute
     prefix: /api
+
+auth:
+    path: /auth
+    methods: ['POST']

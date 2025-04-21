@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "generate:types": "dotenv -e .env.local -e .env -- sh -c 'openapi-typescript $NEXT_PUBLIC_API_URL/docs.jsonopenapi -o types/openapi.ts'"
+    "generate:types": "dotenv -e .env.local -e .env -- sh -c 'openapi-typescript $INTERNAL_API_URL/docs.jsonopenapi -o types/openapi.ts'"
   },
   "dependencies": {
     "@api-platform/admin": "^4.0.6",
@@ -17,6 +17,7 @@
     "bootstrap": "^5.3.5",
     "formik": "^2.4.6",
     "isomorphic-unfetch": "^4.0.2",
+    "jose": "^6.0.10",
     "next": "^15.2.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

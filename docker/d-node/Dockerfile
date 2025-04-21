@@ -20,7 +20,4 @@ RUN export RUNZSH=yes && \
     sed -i 's/ZSH_THEME=".*"/ZSH_THEME="bira"/' ~/.zshrc && \
     sed -i 's|local user_host="%B%(!.%{$fg\[red\]%}.%{$fg\[green\]%})%n@%m%{$reset_color%} "|local user_host="%B%(!.%{$fg[blue]%}.%{$fg[blue]%})%n@%m%{$reset_color%} "|' ~/.oh-my-zsh/themes/bira.zsh-theme
 
-EXPOSE 80
-ENV PORT=80
-
 ENTRYPOINT ["/entrypoint.sh"]
