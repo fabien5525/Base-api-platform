@@ -1,17 +1,19 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 import { signup } from "actions/auth";
 import { useSession } from "hooks/useSession";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 export default function Page() {
-    const [session, sessionLoaded] = useSession();
     const router = useRouter();
+    const [session, sessionLoaded] = useSession();
 
-    if (session && sessionLoaded) {
-        router.push("/").catch();
-    }
+    useEffect(() => {
+        if (session && sessionLoaded) {
+            router.push("/");
+        }
+    }, [session, sessionLoaded, router]);
 
     const [state, loginAction, pending] = useActionState(signup, undefined);
 

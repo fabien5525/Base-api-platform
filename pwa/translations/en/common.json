@@ -1,4 +1,9 @@
 {
     "greeting": "Greeting",
-    "login": "Login"
+    "login": "Login",
+    "alert": {
+        "success": "Success",
+        "error": "Error",
+        "info": "Information"
+    }
 }
